@@ -1,10 +1,10 @@
-from data_structures.datacenter import *
-from data_structures.network_collection import *
-from urllib.request import Request, urlopen
-from urllib.error import URLError
 import time
 import json
-from data_structures.entry import Entry
+from urllib.request import Request, urlopen
+from urllib.error import URLError
+from data_structures.datacenter import Datacenter
+from data_structures.network_collection import NetworkCollection
+# from data_structures.entry import Entry
 
 URL = "http://www.mocky.io/v2/5e539b332e00007c002dacbe"
 
@@ -26,11 +26,11 @@ def get_data(url, max_retries=5, delay_between_retries=1):
     while retry < max_retries:
         try:
             data = urlopen(r).read()
-            if data :
+            if data:
                 js_data = json.loads(data)
                 break
         except URLError:
-            retry +=1
+            retry += 1
             print('Retry no {}'.format(retry))
             time.sleep(delay_between_retries)
     try:
@@ -51,7 +51,7 @@ def main():
 
     datacenters = [Datacenter(key, value) for key, value in data.items()]
 
-    
+
     for i in datacenters:
         Datacenter.remove_invalid_clusters(i)
         print(i.name)
@@ -60,23 +60,23 @@ def main():
             # print (str(j.networks) + ' {}'.format(type(j.networks)))
             for k in j.networks:
                 NetworkCollection.remove_invalid_records(k)
-                print('Network {}'.format(k.ipv4_network))
+                print('\tNetwork {}'.format(k.ipv4_network))
                 for e in k.entries:
-                    print(e.address)
-                
+                    print('\t\t'+e.address)
+
                 NetworkCollection.sort_records(k)
 
-                print('Sorted record entries:\n')
+                print('\tSorted record entries:')
 
                 for e in k.entries:
-                    print(e.address)
-                
-                
-        
+                    print('\t\t'+e.address)
+
+
+
     with open('mocky_response.json', 'w') as f:
-        json.dump(data,f,indent=3)
-    
-    
+        json.dump(data, f, indent=3)
+
+
 
 
 if __name__ == '__main__':

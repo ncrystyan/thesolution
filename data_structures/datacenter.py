@@ -1,5 +1,5 @@
-from data_structures.cluster import Cluster
 import re
+from data_structures.cluster import Cluster
 class Datacenter:
     def __init__(self, name, cluster_dict):
         """
@@ -10,7 +10,7 @@ class Datacenter:
         """
         self.name = name
         self.clusters = []
-        for key,value in cluster_dict.items():
+        for key, value in cluster_dict.items():
             self.clusters.append(Cluster(key, value['networks'], value['security_level']))
 
 
@@ -18,7 +18,7 @@ class Datacenter:
         """
         Removes invalid objects from the clusters list.
         """
-        
+
         begin = self.name[0:3].upper()
         regex = rf"{begin}-([0-9]){{1,3}}"
         copy = self.clusters.copy()
@@ -27,12 +27,6 @@ class Datacenter:
                 reg = re.search(regex, cluster.name).group(0)
                 if cluster.name != reg:
                     self.clusters.remove(cluster)
-                
+
             except:
                 self.clusters.remove(cluster)
-                
-
-            
-
-
-        
