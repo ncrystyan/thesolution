@@ -3,8 +3,7 @@ import json
 from urllib.request import Request, urlopen
 from urllib.error import URLError
 from data_structures.datacenter import Datacenter
-from data_structures.network_collection import NetworkCollection
-# from data_structures.entry import Entry
+
 
 URL = "http://www.mocky.io/v2/5e539b332e00007c002dacbe"
 
@@ -53,19 +52,19 @@ def main():
 
 
     for i in datacenters:
-        Datacenter.remove_invalid_clusters(i)
+        i.remove_invalid_clusters()
         print(i.name)
         for j in i.clusters:
             print('\t'+j.name)
             # print (str(j.networks) + ' {}'.format(type(j.networks)))
             for k in j.networks:
-                NetworkCollection.remove_invalid_records(k)
+                
+                k.remove_invalid_records()
                 print('\tNetwork {}'.format(k.ipv4_network))
                 for e in k.entries:
                     print('\t\t'+e.address)
 
-                NetworkCollection.sort_records(k)
-
+                k.sort_records()
                 print('\tSorted record entries:')
 
                 for e in k.entries:

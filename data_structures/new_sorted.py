@@ -8,23 +8,22 @@ def customComparator(a, b):
     # print(octetsB)
     if octetsA == octetsB: 
         return 0
-    elif octetsA[0] > octetsB[0]: 
+    elif int(octetsA[0]) > int(octetsB[0]): 
         return 1
-    elif octetsA[0] < octetsB[0]: 
+    elif int(octetsA[0]) < int(octetsB[0]): 
         return -1
-    elif octetsA[1] > octetsB[1]: 
+    elif int(octetsA[1]) > int(octetsB[1]): 
         return 1
-    elif octetsA[1] < octetsB[1]: 
+    elif int(octetsA[1]) < int(octetsB[1]): 
         return -1
-    elif octetsA[2] > octetsB[2]: 
+    elif int(octetsA[2]) > int(octetsB[2]): 
         return 1
-    elif octetsA[2] < octetsB[2]: 
+    elif int(octetsA[2]) < int(octetsB[2]): 
         return -1
-    elif octetsA[3] > octetsB[3]: 
+    elif int(octetsA[3]) > int(octetsB[3]): 
         return 1
-    elif octetsA[3] < octetsB[3]: 
+    elif int(octetsA[3]) < int(octetsB[3]): 
         return -1
-
 
 def my_sorted(list_entries):
 
